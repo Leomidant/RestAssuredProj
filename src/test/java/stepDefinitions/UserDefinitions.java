@@ -9,6 +9,7 @@ import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
 import org.json.JSONObject;
+import steps.CommonSteps;
 import steps.UserSteps;
 
 import static io.restassured.RestAssured.given;
@@ -41,11 +42,25 @@ public class UserDefinitions {
         userSteps.assertUserAuthorizationTokenIsNotEmpty();
     }
 
-    @Given("User sends get request with authorization token")
+    @Given("User sends get info request with authorization token")
     public void userSendsGetRequestWithAuthorizationToken() throws Exception {
-
+        userSteps.getUserSessionIdAndSetToken();
         userSteps.getUserInformation();
     }
 
+    @Given("User sends get info request with incorrect authorization token")
+    public void userSendsGetInfoRequestWithIncorrectAuthorizationToken() throws Exception {
+        userSteps.setInvalidSessionId();
+        userSteps.getUserInformation();
+    }
 
+    @And("The user does not see status code {int} in message body")
+    public void theUserDoesNotSeeStatusCodeInMessageBody(int statusCode) {
+        userSteps.assertUserResponseDoseNotContainsStatusCode(statusCode);
+    }
+
+    @Then("The user does not see gets message {string} in message body")
+    public void theUserDoesNotSeeGetsMessageInMessageBody(String expectedMessage) {
+        userSteps.assertUserResponseDoesNotContainsMessageValue(expectedMessage);
+    }
 }

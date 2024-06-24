@@ -1,19 +1,14 @@
 package steps;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import io.cucumber.cienvironment.internal.com.eclipsesource.json.JsonObject;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.example.Service;
-import org.json.JSONObject;
+import org.test.Service;
 import org.testng.Assert;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.requestSpecification;
 
 public class CommonSteps {
     private static Response mainResponse;
@@ -52,11 +47,25 @@ public class CommonSteps {
         Assert.assertEquals(excpectedStatusCode, actualStatusCode);
     }
 
+    public static void assertDoesNotContainsStatusCode(int excpectedStatusCode){
+        Response response = mainResponse;
+
+        int actualStatusCode = response.jsonPath().getInt("code");
+        Assert.assertNotEquals(excpectedStatusCode, actualStatusCode);
+    }
+
     public static void assertValueOfKey(String key, String expectedValue){
         Response response = mainResponse;
 
         String actualValue = response.jsonPath().getString(key);
         Assert.assertEquals(expectedValue, actualValue);
+    }
+
+    public static void assertDoesNotContainsValueOfKey(String key, String expectedValue){
+        Response response = mainResponse;
+
+        String actualValue = response.jsonPath().getString(key);
+        Assert.assertNotEquals(expectedValue, actualValue);
     }
 
     public static void assertValueOfKeyIsNotEmpty(String key){
@@ -69,6 +78,10 @@ public class CommonSteps {
     public static void setAuthorizationToken(){
         Response response = mainResponse;
         token = response.jsonPath().getString("token");
+    }
+
+    public static void setIncorrectAuthorizationToken(){
+        token = ("testToken");
     }
 
 }

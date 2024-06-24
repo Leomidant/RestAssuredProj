@@ -1,6 +1,5 @@
-package org.example;
+package org.test;
 
-import io.restassured.*;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
