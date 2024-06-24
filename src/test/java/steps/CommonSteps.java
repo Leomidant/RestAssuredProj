@@ -84,4 +84,10 @@ public class CommonSteps {
         token = ("testToken");
     }
 
+    public static void reset() {
+        mainResponse = null;
+        requestSpecification = given();
+        token = null;
+    }
+
 }
