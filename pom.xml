@@ -129,6 +129,7 @@
 
 
     </dependencies>
+
     <build>
         <plugins>
             <!-- Maven Surefire Plugin -->
@@ -138,7 +139,8 @@
                 <version>2.22.2</version>
                 <configuration>
                     <includes>
-                        <include>**/RunMobileCucumberTest.java</include>
+<!--                        <include>**/RunMobileCucumberTest.java</include>-->
+                        <include>**/RunApiCucumberTest.java</include>
                     </includes>
                 </configuration>
             </plugin>
@@ -150,8 +152,17 @@
                 <version>2.8</version>
                 <executions>
                     <execution>
+                        <id>allure-report</id>
+                        <phase>post-integration-test</phase>
                         <goals>
-                            <goal>serve</goal>  <!-- To view the report after the tests -->
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>allure-results</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>aggregate</goal>
                         </goals>
                     </execution>
                 </executions>
