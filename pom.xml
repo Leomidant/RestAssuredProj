@@ -139,7 +139,7 @@
                 <version>2.22.2</version>
                 <configuration>
                     <includes>
-<!--                        <include>**/RunMobileCucumberTest.java</include>-->
+                        <include>**/RunMobileCucumberTest.java</include>
                         <include>**/RunApiCucumberTest.java</include>
                     </includes>
                 </configuration>
