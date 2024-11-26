@@ -61,7 +61,7 @@ mvn clean test -Dcucumber.filter.tags="@mobile"
 After running the tests, generate and view the Allure report:
 1. Serve the report locally:
    ```bash
-   allure serve target/allure-results
+   allure serve allure-results
    ```
 2. This command will open the Allure report in your default browser.
 
